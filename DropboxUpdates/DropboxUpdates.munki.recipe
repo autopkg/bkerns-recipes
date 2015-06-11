@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the current release version of Dropbox and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>edu.purdue.ag.munki.DropboxUpdates</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>DropboxUpdates</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/Dropbox</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>Dropbox is a free service that lets you bring all your photos, docs, and videos anywhere. This means that any file you save to your Dropbox will automatically save to all your computers, phones and even the Dropbox website.</string>
+			<key>display_name</key>
+			<string>Dropbox</string>
+			<key>minimum_os_version</key>
+			<string>10.4</string>
+			<key>name</key>
+			<string>Dropbox</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/sh
+# based on Ruby postinstall script by Riley Shott:
+# https://groups.google.com/group/munki-dev/browse_thread/thread/a2813e7f62535f13/63d127534541f863
+# modifications:
+# - always extract the helper tool with each install instead of skipping if it exists
+# - remove xattr com.apple.quarantine removal, as Munki will have already done this upon 
+#   installation; normal autopkg runs also won't quarantine the download to begin with
+
+HELPER_SRC_PATH=/Applications/Dropbox.app/Contents/Resources/DropboxHelperInstaller.tgz
+HELPER_DST_DIR=/Library/DropboxHelperTools
+HELPER_DST_PATH="$HELPER_DST_DIR/DropboxHelperInstaller"
+
+if [ -e "$HELPER_SRC_PATH" ]; then
+  [ -d "$HELPER_DST_DIR" ] || mkdir "$HELPER_DST_DIR"
+  /usr/bin/tar -C "$HELPER_DST_DIR" -xz -f "$HELPER_SRC_PATH"
+  /bin/chmod 04511 "$HELPER_DST_PATH"
+  /usr/sbin/chown root:wheel "$HELPER_DST_PATH"
+else
+  echo "Expected $HELPER_SRC_PATH, but it was not present in the Dropbox dmg."
+  exit 1
+fi
+</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.0</string>
+	<key>ParentRecipe</key>
+	<string>edu.purdue.ag.download.DropboxUpdates</string>
+	<key>Process</key>
+	<array>
+        <dict>
+		<key>Arguments</key>
+		<dict>
+			<key>pkg_path</key>
+			<string>%pathname%</string>
+			<key>repo_subdirectory</key>
+			<string>%MUNKI_REPO_SUBDIR%</string>
+		</dict>
+		<key>Processor</key>
+		<string>MunkiImporter</string>
+        </dict>
+	</array>
+</dict>
+</plist>
