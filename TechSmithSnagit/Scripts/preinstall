@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Remove previous version of Camtasia from /Applications
+# Remove previous version of Snagit from /Applications
 
 if [ -d "$3/Applications/Snagit.app" ]; then
    rm -rf "$3/Applications/Snagit.app"
