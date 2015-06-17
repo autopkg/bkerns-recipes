@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest TechSmith Camtasia disk image.</string>
 	<key>Identifier</key>
-	<string>edu.purdue.ag.download.TechSmithCamtasia</string>
+	<string>edu.purdue.cla.download.TechSmithCamtasia</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
