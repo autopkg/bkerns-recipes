@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the current disk image for the release version of MunkiAdmin. (No previews)</string>
+	<string>Downloads the latest TechSmith Snagit disk image.</string>
 	<key>Identifier</key>
-	<string>edu.purdue.ag.download.MunkiAdminUpdates</string>
+	<string>edu.purdue.cla.download.TechSmithSnagit</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>MunkiAdminUpdates</string>
+		<string>TechSmithSnagit</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
@@ -21,9 +21,9 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>https://github.com/hjuutilainen/munkiadmin/releases</string>
+				<string>http://www.techsmith.com/download/alternate.asp</string>
 				<key>re_pattern</key>
-				<string>(?!&lt;a href=\&quot;.*-preview.*\.dmg.*\&quot;&gt;)(?:&lt;a href=\&quot;)(.*\.dmg)(?:.*\&quot;&gt;)</string>
+				<string>(?:&lt;h4&gt;&lt;a href=&quot;)(http://download\.techsmith\.com/snagitmac/enu/.*/snagit\.dmg)(?:&quot;&gt;)</string>
 			</dict>
 		</dict>
 		<dict>
@@ -32,7 +32,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>https://github.com%match%</string>
+				<string>%match%</string>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 			</dict>

@@ -3,43 +3,45 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the current release version of MunkiAdmin and imports into Munki. (No previews)</string>
+	<string>Downloads the current release version of TechSmith Snagit and imports into Munki.</string>
 	<key>Identifier</key>
-	<string>edu.purdue.ag.munki.MunkiAdminUpdates</string>
+	<string>edu.purdue.cla.munki.TechSmithSnagit</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>MunkiAdmin</string>
+		<string>TechSmithSnagit</string>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/MunkiAdmin</string>
+		<string>apps/TechSmith</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
 			<array>
-				<string>MunkiAdmin</string>
+				<string>Snagit</string>
+				<string>SnagitAppleScriptExecutor</string>
+				<string>SnagitHelper</string>
 			</array>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>MunkiAdmin is a GUI for managing munki repositories. It is written with Objective-C and uses in-memory Core Data store as a backend.</string>
+			<string>Use images and videos to show people exactly what you’re seeing. Snagit gives you an easy way to quickly provide better feedback, create clear documentation, and change the way you work together.</string>
 			<key>display_name</key>
-			<string>MunkiAdmin</string>
+			<string>TechSmith Snagit</string>
 			<key>minimum_os_version</key>
 			<string>10.8</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
-			<false/>
+			<true/>
 			<key>unattended_uninstall</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
 	<key>ParentRecipe</key>
-	<string>edu.purdue.ag.download.MunkiAdminUpdates</string>
+	<string>edu.purdue.cla.download.TechSmithSnagit</string>
 	<key>Process</key>
 	<array>
         <dict>
