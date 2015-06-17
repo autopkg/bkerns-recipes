@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the current release version of EMC Syncplicity and imports into Munki. Includes a preinstall script that will check for an existing "Syncplicity.app" in /Applications and remove it if found. Also includes a postinstall script that copies first run files into place to prevent Admin prompting, and disables automatic updates and checks.</string>
+	<key>Identifier</key>
+	<string>com.github.autopkg.kernsb.munki.EMCSyncplicity</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>EMCSyncplicity</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/EMC</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>blocking_applications</key>
+			<array>
+				<string>Syncplicity</string>
+			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>EMC Syncplicity is enterprise-grade file sharing that’s easy for your users and secure for your business.</string>
+			<key>display_name</key>
+			<string>EMC Syncplicity</string>
+			<key>minimum_os_version</key>
+			<string>10.7</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>preinstall_script</key>
+			<string>#!/usr/bin/python
+
+import os
+import shutil
+
+if os.path.exists('/Applications/Syncplicity.app'):
+    shutil.rmtree('/Applications/Syncplicity.app')
+
+</string>
+			<key>postinstall_script</key>
+			<string>#!/usr/bin/python
+
+import os
+import shutil
+import CoreFoundation
+from CoreFoundation import *
+
+if os.path.exists('/Library/ScriptingAdditions/LiferayNativity.osax'):
+    shutil.rmtree('/Library/ScriptingAdditions/LiferayNativity.osax')
+
+if not os.path.exists('/Library/ScriptingAdditions/LiferayNativity.osax'):
+    shutil.copytree('/Applications/Syncplicity.app/Contents/Resources/LiferayNativity.osax', '/Library/ScriptingAdditions/LiferayNativity.osax')
+
+base_dir = os.walk('/System/Library/User Template').next()[1]
+template_dirs = [item for item in base_dir]
+
+users_dir = os.walk('/Users').next()[1]
+home_dirs = [item for item in users_dir if not item.startswith('.') and item != 'Shared']
+
+CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+CoreFoundation.CFPreferencesSynchronize("/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+
+for folder in template_dirs:
+    CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSynchronize("/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+
+for folder in home_dirs:
+    CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSynchronize("/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+
+</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.autopkg.kernsb.download.EMCSyncplicity</string>
+	<key>Process</key>
+	<array>
+        <dict>
+		<key>Arguments</key>
+		<dict>
+			<key>pkg_path</key>
+			<string>%pathname%</string>
+			<key>repo_subdirectory</key>
+			<string>%MUNKI_REPO_SUBDIR%</string>
+		</dict>
+		<key>Processor</key>
+		<string>MunkiImporter</string>
+        </dict>
+	</array>
+</dict>
+</plist>
