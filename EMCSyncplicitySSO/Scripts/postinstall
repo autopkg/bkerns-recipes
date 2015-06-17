@@ -1,0 +1,32 @@
+#!/usr/bin/python
+
+import os
+import shutil
+import CoreFoundation
+from CoreFoundation import *
+
+if os.path.exists('/Library/ScriptingAdditions/LiferayNativity.osax'):
+    shutil.rmtree('/Library/ScriptingAdditions/LiferayNativity.osax')
+
+if not os.path.exists('/Library/ScriptingAdditions/LiferayNativity.osax'):
+    shutil.copytree('/Applications/Syncplicity.app/Contents/Resources/LiferayNativity.osax', '/Library/ScriptingAdditions/LiferayNativity.osax')
+
+base_dir = os.walk('/System/Library/User Template').next()[1]
+template_dirs = [item for item in base_dir]
+
+users_dir = os.walk('/Users').next()[1]
+home_dirs = [item for item in users_dir if not item.startswith('.') and item != 'Shared']
+
+CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+CoreFoundation.CFPreferencesSynchronize("/Library/Preferences/com.syncplicity.Syncplicity", kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+
+for folder in template_dirs:
+    CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSynchronize("/System/Library/User Template/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+
+for folder in home_dirs:
+    CoreFoundation.CFPreferencesSetValue("SUAutomaticallyUpdate", False, "/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSetValue("SUEnableAutomaticChecks", False, "/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+    CoreFoundation.CFPreferencesSynchronize("/Users/%s/Library/Preferences/com.syncplicity.Syncplicity" % (folder), kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
