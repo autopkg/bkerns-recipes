@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the current release version of TechSmith Camtasia and imports into Munki.</string>
 	<key>Identifier</key>
-	<string>edu.purdue.cla.munki.TechSmithCamtasia</string>
+	<string>com.github.autopkg.kernsb.munki.TechSmithCamtasia</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
@@ -39,7 +39,7 @@
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
 	<key>ParentRecipe</key>
-	<string>edu.purdue.cla.download.TechSmithCamtasia</string>
+	<string>com.github.autopkg.kernsb.download.TechSmithCamtasia</string>
 	<key>Process</key>
 	<array>
         <dict>

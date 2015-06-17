@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads Camtasia disk image and builds a package. The installer package includes a preinstall script that will check for an existing "Camtasia 2.app" in /Applications and remove it if found. Adapted from rtrouton's Firefox pkg recipe.</string>
     <key>Identifier</key>
-    <string>edu.purdue.cla.pkg.TechSmithCamtasia</string>
+    <string>com.github.autopkg.kernsb.pkg.TechSmithCamtasia</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
@@ -14,7 +14,7 @@
     <key>MinimumVersion</key>
     <string>0.2.0</string>
     <key>ParentRecipe</key>
-    <string>edu.purdue.cla.download.TechSmithCamtasia</string>
+    <string>com.github.autopkg.kernsb.download.TechSmithCamtasia</string>
     <key>Process</key>
     <array>
         <dict>
