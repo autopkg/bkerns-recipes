@@ -2,7 +2,7 @@
 
 # Remove previous version of Snagit from /Applications
 
-if [ -d "$3/Applications/Snagit.app" ]; then
-   rm -rf "$3/Applications/Snagit.app"
+if [ -d "/Applications/Snagit.app" ]; then
+   /bin/rm -rf "/Applications/Snagit.app"
 fi
 

@@ -2,7 +2,7 @@
 
 # Remove previous version of Camtasia from /Applications
 
-if [ -d "$3/Applications/Camtasia 2.app" ]; then
-   rm -rf "$3/Applications/Camtasia 2.app"
+if [ -d "/Applications/Camtasia 2.app" ]; then
+   /bin/rm -rf "/Applications/Camtasia 2.app"
 fi
 

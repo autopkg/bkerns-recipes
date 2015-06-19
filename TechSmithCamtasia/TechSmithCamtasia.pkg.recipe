@@ -10,6 +10,8 @@
     <dict>
         <key>NAME</key>
         <string>TechSmithCamtasia</string>
+        <key>CAMTASIA_KEY</key>
+        <string></string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.2.0</string>
@@ -17,6 +19,15 @@
     <string>com.github.autopkg.kernsb.download.TechSmithCamtasia</string>
     <key>Process</key>
     <array>
+        <dict>
+            <key>Processor</key>
+            <string>TechSmithAddScriptKey</string>
+            <key>Arguments</key>
+            <dict>
+                <key>REG_KEY</key>
+                <string>%CAMTASIA_KEY%</string>
+            </dict>
+        </dict>
         <dict>
             <key>Processor</key>
             <string>AppDmgVersioner</string>

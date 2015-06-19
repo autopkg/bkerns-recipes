@@ -1,56 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>Description</key>
-	<string>Downloads the current release version of TechSmith Snagit and imports into Munki.</string>
-	<key>Identifier</key>
-	<string>com.github.autopkg.kernsb.munki.TechSmithSnagit</string>
-	<key>Input</key>
-	<dict>
-		<key>NAME</key>
-		<string>TechSmithSnagit</string>
-        <key>SNAGIT_KEY</key>
-        <string></string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/TechSmith</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>Snagit</string>
-				<string>SnagitAppleScriptExecutor</string>
-				<string>SnagitHelper</string>
-			</array>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>description</key>
-			<string>Use images and videos to show people exactly what you’re seeing. Snagit gives you an easy way to quickly provide better feedback, create clear documentation, and change the way you work together.</string>
-			<key>display_name</key>
-			<string>TechSmith Snagit</string>
-			<key>minimum_os_version</key>
-			<string>10.9</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>preinstall_script</key>
-			<string>#!/bin/sh
+#!/bin/sh
 
-# Remove previous version of Snagit from /Applications
-
-if [ -d "/Applications/Snagit.app" ]; then
-   /bin/rm -rf "/Applications/Snagit.app"
-fi
-</string>
-			<key>postinstall_script</key>
-			<string>#!/bin/sh
-
-regkey="%SNAGIT_KEY%"
+regkey=""
 
 if [ -n "$regkey" ]; then
-	[[ ! -d /Users/Shared/TechSmith ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith
-	[[ ! -d /Users/Shared/TechSmith/Snagit ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith/Snagit
+	[[ ! -d /Users/Shared/TechSmith ]] && /bin/mkdir /Users/Shared/TechSmith
+	[[ ! -d /Users/Shared/TechSmith/Snagit ]] && /bin/mkdir /Users/Shared/TechSmith/Snagit
 	/usr/bin/defaults write /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey RegKey -data "$regkey"
 	/usr/bin/plutil -convert xml1 /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist
 	/bin/mv /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey
@@ -107,35 +61,8 @@ do
         /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" tutorialAssetsShown -bool "TRUE"
         /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" tutorialImageShown -bool "TRUE"
         /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" RearrangedForStepTool -bool "TRUE"
-        owner=$(/usr/bin/stat -f &#37;Su:&#37;Sg "/Users/${USER}/Library/Preferences")
+        owner=$(/usr/bin/stat -f %Su:%Sg "/Users/${USER}/Library/Preferences")
         /usr/sbin/chown "${owner}" "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit.plist"
         /bin/chmod 600 "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit.plist"
     fi
 done
-</string>
-			<key>unattended_install</key>
-			<true/>
-			<key>unattended_uninstall</key>
-			<true/>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>0.2.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.autopkg.kernsb.download.TechSmithSnagit</string>
-	<key>Process</key>
-	<array>
-        <dict>
-		<key>Arguments</key>
-		<dict>
-			<key>pkg_path</key>
-			<string>%pathname%</string>
-			<key>repo_subdirectory</key>
-			<string>%MUNKI_REPO_SUBDIR%</string>
-		</dict>
-		<key>Processor</key>
-		<string>MunkiImporter</string>
-        </dict>
-	</array>
-</dict>
-</plist>

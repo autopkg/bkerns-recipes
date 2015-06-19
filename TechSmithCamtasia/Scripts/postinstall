@@ -1,54 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>Description</key>
-	<string>Downloads the current release version of TechSmith Camtasia and imports into Munki.</string>
-	<key>Identifier</key>
-	<string>com.github.autopkg.kernsb.munki.TechSmithCamtasia</string>
-	<key>Input</key>
-	<dict>
-		<key>NAME</key>
-		<string>TechSmithCamtasia</string>
-        <key>CAMTASIA_KEY</key>
-        <string></string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/TechSmith</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>Camtasia 2</string>
-			</array>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>description</key>
-			<string>Powerful, yet easy-to-use, Camtasia helps you create professional videos without having to be a video pro. Easily record your on-screen activity or import HD camera video, customize and edit content, and share your videos with viewers on nearly any device.</string>
-			<key>display_name</key>
-			<string>TechSmith Camtasia</string>
-			<key>minimum_os_version</key>
-			<string>10.9</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>preinstall_script</key>
-			<string>#!/bin/sh
+#!/bin/sh
 
-# Remove previous version of Camtasia from /Applications
-
-if [ -d "/Applications/Camtasia 2.app" ]; then
-   /bin/rm -rf "/Applications/Camtasia 2.app"
-fi
-</string>
-			<key>postinstall_script</key>
-			<string>#!/bin/sh
-
-regkey="%CAMTASIA_KEY%"
+regkey=""
 
 if [ -n "$regkey" ]; then
-	[[ ! -d /Users/Shared/TechSmith ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith
-	[[ ! -d /Users/Shared/TechSmith/Camtasia ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith/Camtasia
+	[[ ! -d /Users/Shared/TechSmith ]] && /bin/mkdir /Users/Shared/TechSmith
+	[[ ! -d /Users/Shared/TechSmith/Camtasia ]] && /bin/mkdir /Users/Shared/TechSmith/Camtasia
 	/usr/bin/defaults write /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key RegKey -data "$regkey"
 	/usr/bin/plutil -convert xml1 /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist
 	/bin/mv /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key
@@ -67,7 +23,7 @@ do
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" HasRun2_8 -bool "TRUE"
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" HasRunGettingStartedProject_2 -bool "TRUE"
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" SUEnableAutomaticChecks -bool "FALSE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" SUFeedURL -string "http://techsmithredirect.appspot.com/cmac?target=sparkleappcast&amp;amp;amp;product=camtasiamac&amp;amp;amp;lang=enu&amp;amp;amp;ver=2.4.1&amp;amp;amp;os=mac&amp;amp;amp;code=none"
+	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" SUFeedURL -string "http://techsmithredirect.appspot.com/cmac?target=sparkleappcast&amp;amp;product=camtasiamac&amp;amp;lang=enu&amp;amp;ver=2.4.1&amp;amp;os=mac&amp;amp;code=none"
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" SUHasLaunchedBefore -bool "TRUE"
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" SUSendProfileInfo -bool "FALSE"
 	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2" welcomeFlag -bool "TRUE"
@@ -86,41 +42,14 @@ do
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" HasRun2_4 -bool "TRUE"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" HasRunGettingStartedProject_2 -bool "TRUE"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" SUEnableAutomaticChecks -bool "FALSE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" SUFeedURL -string "http://techsmithredirect.appspot.com/cmac?target=sparkleappcast&amp;amp;amp;product=camtasiamac&amp;amp;amp;lang=enu&amp;amp;amp;ver=2.4.1&amp;amp;amp;os=mac&amp;amp;amp;code=none"
+	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" SUFeedURL -string "http://techsmithredirect.appspot.com/cmac?target=sparkleappcast&amp;amp;product=camtasiamac&amp;amp;lang=enu&amp;amp;ver=2.4.1&amp;amp;os=mac&amp;amp;code=none"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" SUHasLaunchedBefore -bool "TRUE"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" SUSendProfileInfo -bool "TRUE"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" welcomeFlag -bool "TRUE"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" WhatsNewVersion -string "${ver}"
 	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2" EnableTrackerBird -bool "FALSE"
-        owner=$(/usr/bin/stat -f &#37;Su:&#37;Sg "/Users/${USER}/Library/Preferences")
+        owner=$(/usr/bin/stat -f %Su:%Sg "/Users/${USER}/Library/Preferences")
         /usr/sbin/chown "${owner}" "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2.plist"
         /bin/chmod 600 "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2.plist"
     fi
 done
-</string>
-			<key>unattended_install</key>
-			<true/>
-			<key>unattended_uninstall</key>
-			<true/>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>0.2.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.autopkg.kernsb.download.TechSmithCamtasia</string>
-	<key>Process</key>
-	<array>
-        <dict>
-		<key>Arguments</key>
-		<dict>
-			<key>pkg_path</key>
-			<string>%pathname%</string>
-			<key>repo_subdirectory</key>
-			<string>%MUNKI_REPO_SUBDIR%</string>
-		</dict>
-		<key>Processor</key>
-		<string>MunkiImporter</string>
-        </dict>
-	</array>
-</dict>
-</plist>
