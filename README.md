@@ -23,7 +23,7 @@ To use CAMTASIA_KEY, create an override and add the key value. The needed key va
 
 ```
 cp /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist
-defaults read "/Users/Shared/TechSmith/Camtasia/Camtasia Registration Key.plist" RegKey | sed 's/[<> ]//g'
+defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist RegKey | sed 's/[<> ]//g'
 ```
 
 ####TechSmithSnagit
@@ -36,7 +36,7 @@ To use SNAGIT_KEY, create an override and add the key value. The needed key valu
 
 ```
 cp /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist
-defaults read "/Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist" RegKey | sed 's/[<> ]//g'
+defaults read /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist RegKey | sed 's/[<> ]//g'
 ```
 
 
