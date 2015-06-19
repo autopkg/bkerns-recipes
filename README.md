@@ -7,7 +7,7 @@ Download, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg recip
 
 ####EMCSyncplicitySSO
 
-Exact same functionality as the standard Synplicity client recipes, but downloads the SSO client instead of Standard (slightly different).
+Exact same functionality as the standard Synplicity client recipes (above), but downloads the SSO client instead of Standard (slightly different).
 
 ####StuffIt
 
