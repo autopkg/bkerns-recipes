@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads Camtasia disk image, builds a package, and imports into JSS. The installer package includes a preinstall script that will check for an existing "Camtasia 2.app" in /Applications and remove it if found.</string>
+    <string>Downloads Snagit disk image, builds a package, and imports into JSS. The installer package includes a preinstall script that will check for an existing "Snagit.app" in /Applications and remove it if found.</string>
     <key>Identifier</key>
     <string>com.github.autopkg.kernsb.jss.TechSmithSnagit</string>
     <key>Input</key>
