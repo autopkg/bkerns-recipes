@@ -3,7 +3,7 @@ bkerns-recipes
 
 ####EMCSyncplicity
 
-Download, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that copies first-run files into place to prevent admin prompting and disables software update check and notifications.
+Download, JSS, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that copies first-run files into place to prevent admin prompting and disables software update check and notifications.
 
 ####EMCSyncplicitySSO
 
@@ -15,7 +15,7 @@ A Pkg recipe for StuffIt Expander that references keelysam's download recipe.
 
 ####TechSmithCamtasia
 
-Download, Munki, and Pkg recipes for TechSmith Camtasia.
+Download, JSS, Munki, and Pkg recipes for TechSmith Camtasia.
 
 Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that sets a number of first-run preferences. Also, the postinstall uses the optional CAMTASIA_KEY input value to key the install with your registration key, if desired.
 
@@ -28,7 +28,7 @@ defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist
 
 ####TechSmithSnagit
 
-Download, Munki, and Pkg recipes for TechSmith Snagit.
+Download, JSS, Munki, and Pkg recipes for TechSmith Snagit.
 
 Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that sets a number of first-run preferences. Also, the postinstall uses the optional SNAGIT_KEY input value to key the install with your registration key, if desired.
 
