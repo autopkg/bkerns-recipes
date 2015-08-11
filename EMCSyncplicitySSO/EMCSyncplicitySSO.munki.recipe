@@ -23,7 +23,7 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>EMC Syncplicity is enterprise-grade file sharing that’s easy for your users and secure for your business.</string>
+			<string>EMC Syncplicity is enterprise-grade file sharing that's easy for your users and secure for your business.</string>
 			<key>display_name</key>
 			<string>EMC Syncplicity SSO</string>
 			<key>minimum_os_version</key>
