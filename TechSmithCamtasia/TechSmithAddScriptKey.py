@@ -23,7 +23,7 @@ __all__ = ["TechSmithAddScriptKey"]
 
 
 class TechSmithAddScriptKey(Processor):
-    description = "Allows AutoPkg to add a supplied regTechSmithAddScriptKeyistration key to \
+    description = "Allows AutoPkg to add a supplied TechSmithAddScriptKey key to \
                    the postinstall script that will be included in the pkg."
     input_variables = {
         "REG_KEY": {
