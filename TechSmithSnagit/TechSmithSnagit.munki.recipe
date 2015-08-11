@@ -27,7 +27,7 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Use images and videos to show people exactly what you’re seeing. Snagit gives you an easy way to quickly provide better feedback, create clear documentation, and change the way you work together.</string>
+			<string>Use images and videos to show people exactly what you're seeing. Snagit gives you an easy way to quickly provide better feedback, create clear documentation, and change the way you work together.</string>
 			<key>display_name</key>
 			<string>TechSmith Snagit</string>
 			<key>minimum_os_version</key>
