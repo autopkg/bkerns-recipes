@@ -23,7 +23,7 @@
         <key>GROUP_NAME</key>
         <string>%NAME%-update-smart</string>
         <key>SELF_SERVICE_DESCRIPTION</key>
-        <string>EMC Syncplicity is enterprise-grade file sharing that’s easy for your users and secure for your business.</string>
+        <string>EMC Syncplicity is enterprise-grade file sharing that's easy for your users and secure for your business.</string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.4.0</string>
