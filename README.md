@@ -9,6 +9,15 @@ Download, JSS, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg 
 
 Exact same functionality as the standard Synplicity client recipes (above), but downloads the SSO client instead of Standard (slightly different).
 
+
+####Microsoft Office 2016
+
+JSS recipes for MS Word, Excel, PowerPoint, Outlook, and OneNote updates that reference the download recipes in the "recipes" repo. 
+
+####Microsoft OneNote
+
+A JSS recipe for Microsoft OneNote app from the App Store.
+
 ####StuffIt
 
 A Pkg recipe for StuffIt Expander that references keelysam's download recipe.
