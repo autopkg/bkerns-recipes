@@ -15,6 +15,15 @@
 	<string>0.2.0</string>
 	<key>Process</key>
 	<array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>product_name</key>
+                <string>snagit</string>
+            </dict>
+            <key>Processor</key>
+            <string>TechSmithURLProvider</string>
+        </dict>
 		<dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
