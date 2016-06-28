@@ -1,6 +1,6 @@
 #!/bin/sh
 
-regkey="fffe4d004b004100430033002d0048004700430051004e002d00430038005400500047002d00570039003400450050002d004400340042004d004500"
+regkey=""
 
 if [ -n "$regkey" ]; then
 	[[ ! -d /Users/Shared/TechSmith ]] && /bin/mkdir /Users/Shared/TechSmith
