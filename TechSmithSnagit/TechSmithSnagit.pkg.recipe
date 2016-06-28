@@ -74,7 +74,7 @@
                     <key>pkgdir</key>
                     <string>%RECIPE_CACHE_DIR%</string>
                     <key>id</key>
-                    <string>com.techsmith.snagit.pkg</string>
+                    <string>com.techsmith.snagit4.pkg</string>
                     <key>options</key>
                     <string>purge_ds_store</string>
                     <key>scripts</key>
