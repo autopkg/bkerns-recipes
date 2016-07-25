@@ -39,6 +39,8 @@ class TechSmithAddScriptKey(Processor):
         
         key = self.env['REG_KEY']
         
+        print key
+        
         path = os.path.join(os.path.dirname(__file__), 'Scripts/postinstall')
         
         print path
@@ -52,7 +54,7 @@ class TechSmithAddScriptKey(Processor):
             
             if 'regkey=""' in filetext:
                 
-                filetext = filetext.replace('regkey=""', "regkey=\"%s\"" % (key))
+                filetext = filetext.replace('regkey=\"\"', "regkey=\"%s\"" % (key))
                 
                 with open(path, 'w') as file:
                     file.write(filetext)
