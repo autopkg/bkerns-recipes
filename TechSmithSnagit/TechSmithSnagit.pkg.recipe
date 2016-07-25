@@ -21,15 +21,6 @@
     <array>
         <dict>
             <key>Processor</key>
-            <string>TechSmithAddScriptKey</string>
-            <key>Arguments</key>
-            <dict>
-                <key>REG_KEY</key>
-                <string>%SNAGIT_KEY%</string>
-            </dict>
-        </dict>
-        <dict>
-            <key>Processor</key>
             <string>AppDmgVersioner</string>
             <key>Arguments</key>
             <dict>
