@@ -56,7 +56,7 @@ if [ -n "$regkey" ]; then
 	/bin/chmod a+x /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key
 fi
 
-ver=$(defaults read /Applications/Camtasia 2.app/Contents/Info.plist CFBundleShortVersionString)
+ver=$(defaults read /Applications/Camtasia\ 2.app/Contents/Info.plist CFBundleShortVersionString)
 
 for USER_TEMPLATE in $(/bin/ls /System/Library/User\ Template)
 do
