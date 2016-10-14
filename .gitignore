@@ -3,3 +3,5 @@ TechSmithSnagit/Scripts/postinstall
 TechSmithCamtasia/TechSmithAddScriptKey.pyc
 TechSmithSnagit/TechSmithAddScriptKey.pyc
 *.pyc
+
+TechSmithSnagit/Scripts/postinstall

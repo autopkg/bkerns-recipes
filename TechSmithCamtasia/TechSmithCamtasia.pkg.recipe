@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads Camtasia disk image and builds a package. The installer package includes a preinstall script that will check for an existing "Camtasia 2.app" in /Applications and remove it if found. Adapted from rtrouton's Firefox pkg recipe.</string>
+    <string>Downloads Camtasia disk image and builds a package. The installer package includes a preinstall script that will check for an existing "Camtasia 3.app" in /Applications and remove it if found. Adapted from rtrouton's Firefox pkg recipe.</string>
     <key>Identifier</key>
     <string>com.github.autopkg.kernsb.pkg.TechSmithCamtasia</string>
     <key>Input</key>
@@ -57,9 +57,9 @@
             <key>Arguments</key>
             <dict>
                 <key>source_path</key>
-                <string>%pathname%/Camtasia 2.app</string>
+                <string>%pathname%/Camtasia 3.app</string>
                 <key>destination_path</key>
-                <string>%pkgroot%/Applications/Camtasia 2.app</string>
+                <string>%pkgroot%/Applications/Camtasia 3.app</string>
             </dict>
         </dict>
         <dict>
