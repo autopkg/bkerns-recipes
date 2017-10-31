@@ -57,9 +57,9 @@
             <key>Arguments</key>
             <dict>
                 <key>source_path</key>
-                <string>%pathname%/Snagit.app</string>
+                <string>%pathname%/%app_name%</string>
                 <key>destination_path</key>
-                <string>%pkgroot%/Applications/Snagit.app</string>
+                <string>%pkgroot%/Applications/%app_name%</string>
             </dict>
         </dict>
         <dict>
@@ -74,7 +74,7 @@
                     <key>pkgdir</key>
                     <string>%RECIPE_CACHE_DIR%</string>
                     <key>id</key>
-                    <string>com.techsmith.snagit4.pkg</string>
+                    <string>%bundleid%</string>
                     <key>options</key>
                     <string>purge_ds_store</string>
                     <key>scripts</key>
