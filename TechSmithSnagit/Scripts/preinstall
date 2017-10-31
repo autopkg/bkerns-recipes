@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Remove previous version of Snagit from /Applications
+# Remove previous version(s) of Snagit from /Applications
 
-if [ -d "/Applications/Snagit.app" ]; then
-   /bin/rm -rf "/Applications/Snagit.app"
-fi
+oldVersions=$(ls /Applications | grep "Snagit")
 
+for oldVersion in $oldVersions; do
+   /bin/rm -rf "/Applications/${oldVersion}"
+done
