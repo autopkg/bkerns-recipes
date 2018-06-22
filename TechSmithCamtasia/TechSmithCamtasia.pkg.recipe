@@ -57,9 +57,9 @@
             <key>Arguments</key>
             <dict>
                 <key>source_path</key>
-                <string>%pathname%/Camtasia 3.app</string>
+                <string>%pathname%/Camtasia 2018.app</string>
                 <key>destination_path</key>
-                <string>%pkgroot%/Applications/Camtasia 3.app</string>
+                <string>%pkgroot%/Applications/Camtasia 2018.app</string>
             </dict>
         </dict>
         <dict>
