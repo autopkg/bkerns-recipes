@@ -5,19 +5,19 @@ bkerns-recipes
 
 Download, JSS, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that copies first-run files into place to prevent admin prompting and disables software update check and notifications.
 
-*NOTE: My organization no longer makes use of this product, and as such I am not staying up on its releases. If something changes and the recipe breaks, please let me know. 
+*NOTE: My organization no longer makes use of this product, and as such I am not staying up on its releases. If something changes and the recipe breaks, please let me know.*
 
 #### EMCSyncplicitySSO
 
 Exact same functionality as the standard Synplicity client recipes (above), but downloads the SSO client instead of Standard (slightly different).
 
-*NOTE: My organization no longer makes use of this product, and as such I am not staying up on its releases. If something changes and the recipe breaks, please let me know. 
+*NOTE: My organization no longer makes use of this product, and as such I am not staying up on its releases. If something changes and the recipe breaks, please let me know.*
 
 #### Microsoft OneNote
 
 A JSS recipe for Microsoft OneNote app from the App Store.
 
-*NOTE: This recipe is likely no longer necessary, as there is now a stand-alone app download, and other better recipes out there. I will likely be removing this recipe soon.
+*NOTE: This recipe is likely no longer necessary, as there is now a stand-alone app download, and other better recipes out there. I will likely be removing this recipe soon.*
 
 #### StuffIt
 
