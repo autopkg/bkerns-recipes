@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Remove previous version of Camtasia from /Applications
+# Remove previous version(s) of Camtasia from /Applications
 
-if [ -d "/Applications/Camtasia 3.app" ]; then
-   /bin/rm -rf "/Applications/Camtasia 3.app"
-fi
+oldVersions=$(ls /Applications | grep "Camtasia")
 
+for oldVersion in $oldVersions; do
+   /bin/rm -rf "/Applications/${oldVersion}"
+done
