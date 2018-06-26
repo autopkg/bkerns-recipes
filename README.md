@@ -1,23 +1,23 @@
 bkerns-recipes
 --------------
 
-####EMCSyncplicity
+#### EMCSyncplicity
 
 Download, JSS, Munki, and Pkg recipes for EMC Syncplicity client. Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that copies first-run files into place to prevent admin prompting and disables software update check and notifications.
 
-####EMCSyncplicitySSO
+#### EMCSyncplicitySSO
 
 Exact same functionality as the standard Synplicity client recipes (above), but downloads the SSO client instead of Standard (slightly different).
 
-####Microsoft OneNote
+#### Microsoft OneNote
 
 A JSS recipe for Microsoft OneNote app from the App Store.
 
-####StuffIt
+#### StuffIt
 
 A Pkg recipe for StuffIt Expander that references keelysam's download recipe.
 
-####TechSmithCamtasia
+#### TechSmithCamtasia
 
 Download, JSS, Munki, and Pkg recipes for TechSmith Camtasia.
 
@@ -30,7 +30,7 @@ cp /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ Licens
 defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License.plist RegKey | sed 's/[<> ]//g'
 ```
 
-####TechSmithSnagit
+#### TechSmithSnagit
 
 Download, JSS, Munki, and Pkg recipes for TechSmith Snagit.
 
