@@ -9,3 +9,4 @@ TechSmithSnagit/Scripts/postinstall
 *.pyc
 
 TechSmithSnagit/Scripts/postinstall
+*.pyc
