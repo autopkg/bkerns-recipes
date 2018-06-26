@@ -26,8 +26,8 @@ Munki and Pkg recipes include a preinstall script that removes an existing versi
 To use CAMTASIA_KEY, create an override and add the key value. The needed key value can be pulled from a machine that has already been registered with the following:
 
 ```
-cp /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist
-defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key.plist RegKey | sed 's/[<> ]//g'
+cp /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License.plist
+defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License.plist RegKey | sed 's/[<> ]//g'
 ```
 
 ####TechSmithSnagit
