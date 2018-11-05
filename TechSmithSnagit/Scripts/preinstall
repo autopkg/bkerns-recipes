@@ -4,6 +4,6 @@
 
 oldVersions=$(ls /Applications | grep "Snagit")
 
-for oldVersion in $oldVersions; do
+while IFS="\n" read -r oldVersion; do
    /bin/rm -rf "/Applications/${oldVersion}"
-done
+done < <(echo "${oldVersions}")
