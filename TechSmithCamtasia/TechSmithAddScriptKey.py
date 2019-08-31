@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 
 from autopkglib import Processor, ProcessorError
@@ -41,7 +43,7 @@ class TechSmithAddScriptKey(Processor):
         
         path = os.path.join(os.path.dirname(__file__), 'Scripts/postinstall')
         
-        print path
+        print(path)
         
         if key is not None:
             
