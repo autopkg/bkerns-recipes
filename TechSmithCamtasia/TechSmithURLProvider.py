@@ -1,10 +1,16 @@
 #!/usr/bin/python
 
 from __future__ import absolute_import
-import urllib
+
 import json
 
 from autopkglib import Processor, ProcessorError
+
+try:
+    from urllib import request as urllib  # For Python 3
+except ImportError:
+    import urllib  # For Python 2
+
 
 
 __all__ = ["TechSmithURLProvider"]
@@ -59,4 +65,3 @@ class TechSmithURLProvider(Processor):
 if __name__ == "__main__":
     PROCESSOR = TechSmithURLProvider()
     PROCESSOR.execute_shell()
-
