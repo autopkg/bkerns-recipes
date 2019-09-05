@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads Camtasia disk image, builds a package, and imports into JSS. The installer package includes a preinstall script that will check for an existing "Camtasia 3.app" in /Applications and remove it if found.</string>
+    <string>Downloads Camtasia disk image, builds a package, and imports into JSS. The installer package includes a preinstall script that will check for an existing "Camtasia.app" in /Applications and remove it if found.</string>
     <key>Identifier</key>
     <string>com.github.autopkg.kernsb.jss.TechSmithCamtasia</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Camtasia 3</string>
+        <string>Camtasia</string>
         <key>CATEGORY</key>
         <string>Digital Media</string>
         <key>POLICY_CATEGORY</key>
