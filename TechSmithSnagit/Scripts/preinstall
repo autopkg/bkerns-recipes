@@ -2,7 +2,7 @@
 
 # Remove previous version(s) of Snagit from /Applications
 
-oldVersions=$(ls /Applications | grep "Snagit")
+oldVersions=$(ls -1 /Applications | grep "Snagit")
 
 while IFS="\n" read -r oldVersion; do
    /bin/rm -rf "/Applications/${oldVersion}"
