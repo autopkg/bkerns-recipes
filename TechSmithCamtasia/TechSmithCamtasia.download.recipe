@@ -22,7 +22,7 @@
                 <string>camtasia</string>
             </dict>
             <key>Processor</key>
-            <string>TechSmithURLProvider</string>
+            <string>com.github.autopkg.kernsb.download.TechSmithSnagit/TechSmithURLProvider</string>
         </dict>
 		<dict>
 			<key>Processor</key>
