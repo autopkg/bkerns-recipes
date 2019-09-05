@@ -2,7 +2,7 @@
 
 # Remove previous version(s) of Camtasia from /Applications
 
-oldVersions=$(ls /Applications | grep "Camtasia")
+oldVersions=$(ls -1 /Applications | grep "Camtasia")
 
 for oldVersion in $oldVersions; do
    /bin/rm -rf "/Applications/${oldVersion}"
