@@ -36,19 +36,19 @@
 			<string>URLDownloader</string>
 		</dict>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pattern</key>
-				<string>%pathname%/*.app</string>
-			</dict>
-			<key>Processor</key>
-			<string>FileFinder</string>
-		</dict>
+ 			<key>Arguments</key>
+ 			<dict>
+ 				<key>dmg_path</key>
+ 				<string>%pathname%</string>
+ 			</dict>
+ 			<key>Processor</key>
+ 			<string>AppDmgVersioner</string>
+ 		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>info_path</key>
-				<string>%pathname%/%dmg_found_filename%/Contents/Info.plist</string>
+				<string>%pathname%/%app_name%/Contents/Info.plist</string>
 				<key>plist_keys</key>
 				<dict>
 					<key>CFBundleIdentifier</key>
@@ -66,7 +66,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>input_path</key>
-				<string>%pathname%/%dmg_found_filename%</string>
+				<string>%pathname%/%app_name%</string>
 				<key>requirements</key>
 				<string>identifier "%cfbundleidentifier%" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "7TQL462TU8"</string>
 			</dict>
