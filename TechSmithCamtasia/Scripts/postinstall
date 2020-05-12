@@ -3,53 +3,8 @@
 regkey=""
 
 if [ -n "$regkey" ]; then
-	[[ ! -d /Users/Shared/TechSmith ]] && /bin/mkdir /Users/Shared/TechSmith
-	[[ ! -d /Users/Shared/TechSmith/Camtasia ]] && /bin/mkdir /Users/Shared/TechSmith/Camtasia
-	/usr/bin/defaults write /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License RegKey -data "$regkey"
-	/usr/bin/plutil -convert xml1 /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License.plist
-	/bin/mv /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License.plist /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unified\ License
-	/bin/chmod -R 777 /Users/Shared/TechSmith
-	/bin/chmod a+x /Users/Shared/TechSmith/Camtasia\ Registration\ Key\ Unified\ License
+  [[ ! -d "/Users/Shared/TechSmith/Camtasia" ]] && /bin/mkdir -p "/Users/Shared/TechSmith/Camtasia"
+  /bin/echo "$regkey" > "/Users/Shared/TechSmith/Camtasia/LicenseKey"
+  /bin/chmod -R 777 "/Users/Shared/TechSmith"
+  /bin/chmod a+x "/Users/Shared/TechSmith/Camtasia/LicenseKey"
 fi
-
-ver=$(defaults read /Applications/Camtasia\ 2018.app/Contents/Info.plist CFBundleShortVersionString)
-
-for USER_TEMPLATE in $(/bin/ls /System/Library/User\ Template)
-do
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" AnnotationsUpdate2_2 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" AnnotationsUpdate2_3 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRun2018 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRun2_1 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRun2_4 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRun2_8 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRunGettingStartedProject_2 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" HasRunGettingStartedProject_3 -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" SUEnableAutomaticChecks -bool "FALSE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" SUHasLaunchedBefore -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" SUSendProfileInfo -bool "FALSE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" welcomeFlag -bool "TRUE"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" WhatsNewVersion -string "${ver}"
-	/usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.techsmith.camtasia2018" EnableTrackerBird -bool "FALSE"
-done
-
-for USER in $(/bin/ls /Users | /usr/bin/grep -v "Shared\|\.")
-do
-    if [ ! USER = "Shared" ]; then
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" AnnotationsUpdate2_2 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" AnnotationsUpdate2_3 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" HasRun2018 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" HasRun2_1 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" HasRun2_4 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" HasRunGettingStartedProject_2 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" HasRunGettingStartedProject_3 -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" SUEnableAutomaticChecks -bool "FALSE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" SUHasLaunchedBefore -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" SUSendProfileInfo -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" welcomeFlag -bool "TRUE"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" WhatsNewVersion -string "${ver}"
-	    /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018" EnableTrackerBird -bool "FALSE"
-        owner=$(/usr/bin/stat -f %Su:%Sg "/Users/${USER}/Library/Preferences")
-        /usr/sbin/chown "${owner}" "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018.plist"
-        /bin/chmod 600 "/Users/${USER}/Library/Preferences/com.techsmith.camtasia2018.plist"
-    fi
-done
