@@ -2,8 +2,19 @@
 
 # Remove previous version(s) of Camtasia from /Applications
 
+# Save the current IFS values
+old_IFS=$IFS
+
+# Set new IFS to break on new line instead of whitespace
+IFS=$'\n'
+
+# Get any currently installed versions of Camtasia in the Applications directory
 oldVersions=$(ls -1 /Applications | grep "Camtasia")
 
+# Loop to remove all old versions
 for oldVersion in $oldVersions; do
    /bin/rm -rf "/Applications/${oldVersion}"
 done
+
+# Reset IFS to default
+IFS=${old_IFS}
