@@ -1,6 +1,6 @@
+.DS_Store
+
+*.pyc
+
 TechSmithCamtasia/Scripts/postinstall
 TechSmithSnagit/Scripts/postinstall
-TechSmithCamtasia/TechSmithAddScriptKey.pyc
-TechSmithSnagit/TechSmithAddScriptKey.pyc
-*.pyc
-.DS_Store
