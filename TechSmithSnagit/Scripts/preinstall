@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "Checking for previous Snagit versions..."
-/usr/bin/find -E "/Applications" -iregex ".*[/]Snagit ?([0-9]{4})?[.]app" -type d -maxdepth 1 -prune -exec sh -c 'echo "Found previous version: {}\c"; if $( /bin/rm -fR "{}" ); then echo ".....REMOVED"; fi' \;
+echo "Deleting previous Snagit installs (if present)..."
+/usr/bin/find "/Applications" -name "Snagit*.app" -type d -maxdepth 1 -exec rm -rfv {} \;
 
 exit 0
