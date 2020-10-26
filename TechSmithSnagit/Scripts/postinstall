@@ -3,63 +3,8 @@
 regkey=""
 
 if [ -n "$regkey" ]; then
-	[[ ! -d /Users/Shared/TechSmith ]] && /bin/mkdir /Users/Shared/TechSmith
-	[[ ! -d /Users/Shared/TechSmith/Snagit ]] && /bin/mkdir /Users/Shared/TechSmith/Snagit
-	/usr/bin/defaults write /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey RegKey -data "$regkey"
-	/usr/bin/plutil -convert xml1 /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist
-	/bin/mv /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey
-	/bin/chmod -R 777 /Users/Shared/TechSmith
-	/bin/chmod a+x /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey
+  [[ ! -d "/Users/Shared/TechSmith/Snagit" ]] && /bin/mkdir -p "/Users/Shared/TechSmith/Snagit"
+  /bin/echo "$regkey" > "/Users/Shared/TechSmith/Snagit/LicenseKey"
+  /bin/chmod -R 777 "/Users/Shared/Snagit"
+  /bin/chmod a+x "/Users/Shared/TechSmith/Snagit/LicenseKey"
 fi
-
-ver=$(defaults read /Applications/Snagit 2018.app/Contents/Info.plist CFBundleShortVersionString)
-
-for USER_TEMPLATE in $(/bin/ls /System/Library/User\ Template)
-do
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" DidTheOneOneRearrange -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran1.1Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran2018_0_0Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran3.3Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.0.2Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.0Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.1.2Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" RanGroupContainersUpgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" RearrangedForStepTool -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" SUEnableAutomaticChecks -bool "FALSE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" SUHasLaunchedBefore -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" hasLaunchedSnagitPreviously -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" kEditorHasShownFontMessage -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" lastLaunchedSnagitVersion -string "${ver}"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" resetVideoData -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" stampSubpath -string "/Stamps.localized"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" tutorialAssetsShown -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit2018" tutorialImageShown -bool "TRUE"
-done
-
-for USER in $(/bin/ls /Users | /usr/bin/grep -v "Shared\|\.")
-do
-    if [ ! USER = "Shared" ]; then
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" DidTheOneOneRearrange -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" DidTheOneOneRearrange -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran1.1Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran2018_0_0Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran3.3Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.0.2Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.0Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" Ran4.1.2Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" RanGroupContainersUpgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" RearrangedForStepTool -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" SUEnableAutomaticChecks -bool "FALSE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" SUHasLaunchedBefore -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" hasLaunchedSnagitPreviously -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" kEditorHasShownFontMessage -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" lastLaunchedSnagitVersion -string "${ver}"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" resetVideoData -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" stampSubpath -string "/Stamps.localized"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" tutorialAssetsShown -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018" tutorialImageShown -bool "TRUE"
-        owner=$(/usr/bin/stat -f %Su:%Sg "/Users/${USER}/Library/Preferences")
-        /usr/sbin/chown "${owner}" "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018.plist"
-        /bin/chmod 600 "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit2018.plist"
-    fi
-done
