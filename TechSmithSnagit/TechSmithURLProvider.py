@@ -53,7 +53,7 @@ class TechSmithURLProvider(URLGetter):
         data = json.loads(self.download(url))
 
         # Get version information for the item with the greatest VersionID
-        data = sorted(data, key=lambda x: int(x["VersionID"]), reverse=True)
+        data = sorted(data, key=lambda x: int(x["Major"]), reverse=True)
         vers = "%s.%s.%s" % (data[0]["Major"], data[0]["Minor"], data[0]["Maintenance"])
         versionid = data[0]["VersionID"]
 
