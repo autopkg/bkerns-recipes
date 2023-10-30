@@ -14,7 +14,7 @@
 		<string></string>
 	</dict>
 	<key>MinimumVersion</key>
-	<string>0.2.0</string>
+	<string>0.2.5</string>
 	<key>ParentRecipe</key>
 	<string>com.github.autopkg.kernsb.download.TechSmithSnagit</string>
 	<key>Process</key>
@@ -22,11 +22,11 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>REG_KEY</key>
-				<string>%SNAGIT_KEY%</string>
+				<key>predicate</key>
+				<string>SNAGIT_KEY == ""</string>
 			</dict>
 			<key>Processor</key>
-			<string>TechSmithAddScriptKey</string>
+			<string>StopProcessingIf</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>
@@ -37,7 +37,18 @@
 					<string>0775</string>
 				</dict>
 				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgdirs</key>
+				<dict/>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/scripts</string>
 			</dict>
 			<key>Processor</key>
 			<string>PkgRootCreator</string>
@@ -46,7 +57,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>destination_path</key>
-				<string>%pkgroot%/Applications/%app_name%</string>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/%app_name%</string>
 				<key>source_path</key>
 				<string>%pathname%/%app_name%</string>
 			</dict>
@@ -56,17 +67,61 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>file_content</key>
+				<string>#!/bin/sh
+
+echo "Deleting previous Snagit installs (if present)..."
+/usr/bin/find "/Applications" -name "Snagit*.app" -type d -maxdepth 1 -exec rm -rfv {} \;
+
+exit 0</string>
+				<key>file_mode</key>
+				<string>0755</string>
+				<key>file_path</key>
+				<string>%RECIPE_CACHE_DIR%/scripts/preinstall</string>
+			</dict>
+			<key>Processor</key>
+			<string>FileCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>file_content</key>
+				<string>#!/bin/sh
+
+regkey="%SNAGIT_KEY%"
+
+if [ -n "$regkey" ]; then
+	[[ ! -d "/Users/Shared/TechSmith/Snagit" ]] &amp;&amp; /bin/mkdir -p "/Users/Shared/TechSmith/Snagit"
+	/bin/echo "$regkey" &gt; "/Users/Shared/TechSmith/Snagit/LicenseKey"
+	/bin/chmod -R 777 "/Users/Shared/Snagit"
+	/bin/chmod a+x "/Users/Shared/TechSmith/Snagit/LicenseKey"
+else
+	exit 1
+fi
+
+exit 0</string>
+				<key>file_mode</key>
+				<string>0755</string>
+				<key>file_path</key>
+				<string>%RECIPE_CACHE_DIR%/scripts/postinstall</string>
+			</dict>
+			<key>Processor</key>
+			<string>FileCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>pkg_request</key>
 				<dict>
 					<key>chown</key>
 					<array>
 						<dict>
-							<key>group</key>
-							<string>admin</string>
 							<key>path</key>
 							<string>Applications</string>
 							<key>user</key>
 							<string>root</string>
+							<key>group</key>
+							<string>admin</string>
 						</dict>
 					</array>
 					<key>id</key>
@@ -75,14 +130,28 @@
 					<string>purge_ds_store</string>
 					<key>pkgdir</key>
 					<string>%RECIPE_CACHE_DIR%</string>
+					<key>pkgroot</key>
+					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 					<key>scripts</key>
-					<string>Scripts</string>
+					<string>scripts</string>
 					<key>pkgname</key>
 					<string>%NAME%-%version%</string>
 				</dict>
 			</dict>
 			<key>Processor</key>
 			<string>PkgCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+					<string>%RECIPE_CACHE_DIR%/scripts</string>
+				</array>
+			</dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
 		</dict>
 	</array>
 </dict>

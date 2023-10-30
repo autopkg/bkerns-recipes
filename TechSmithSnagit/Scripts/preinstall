@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Deleting previous Snagit installs (if present)..."
-/usr/bin/find "/Applications" -name "Snagit*.app" -type d -maxdepth 1 -exec rm -rfv {} \;
-
-exit 0
