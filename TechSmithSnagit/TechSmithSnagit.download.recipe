@@ -45,10 +45,6 @@
 			<string>AppDmgVersioner</string>
 		</dict>
 		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>input_path</key>
@@ -60,5 +56,9 @@
 			<string>CodeSignatureVerifier</string>
 		</dict>
 	</array>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
 </dict>
 </plist>
