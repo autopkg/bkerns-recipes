@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads Snagit disk image and builds a package. The installer package includes a preinstall script that will check for an existing "Snagit.app" in /Applications and remove it if found. Adapted from rtrouton's Firefox pkg recipe.</string>
+	<string>Downloads Snagit disk image and builds a package.  Adapted from rtrouton's Firefox pkg recipe.
+
+The installer package includes a preinstall script that will check for an existing "Snagit.app" in /Applications and remove it if found.
+
+Optionally, provide a license key to license Snagit during the installation.  If a license key is not provided, Snagit will not be licensed, but will still install.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.kernsb.pkg.TechSmithSnagit</string>
 	<key>Input</key>
@@ -92,11 +96,11 @@ regkey="%SNAGIT_KEY%"
 
 if [ -n "$regkey" ]; then
 	[[ ! -d "/Users/Shared/TechSmith/Snagit" ]] &amp;&amp; /bin/mkdir -p "/Users/Shared/TechSmith/Snagit"
-	/bin/echo "$regkey" &gt; "/Users/Shared/TechSmith/Snagit/LicenseKey"
+	echo "$regkey" &gt; "/Users/Shared/TechSmith/Snagit/LicenseKey"
 	/bin/chmod -R 777 "/Users/Shared/Snagit"
 	/bin/chmod a+x "/Users/Shared/TechSmith/Snagit/LicenseKey"
 else
-	exit 1
+	echo "Warning:  Snagit was not licensed!"
 fi
 
 exit 0</string>
@@ -148,6 +152,7 @@ exit 0</string>
 				<array>
 					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 					<string>%RECIPE_CACHE_DIR%/scripts</string>
+					<string>%RECIPE_CACHE_DIR%/%NAME%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
