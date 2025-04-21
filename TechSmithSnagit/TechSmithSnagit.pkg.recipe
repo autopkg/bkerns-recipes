@@ -7,7 +7,7 @@
 
 The installer package includes a preinstall script that will check for an existing "Snagit.app" in /Applications and remove it if found.
 
-Optionally, provide a license key to license Snagit during the installation.  If a license key is not provided, Snagit will not be licensed, but will still install.</string>
+This recipe requires a license key to be provided in an override via the SNAGIT_KEY input, which will license Snagit during the installation.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.kernsb.pkg.TechSmithSnagit</string>
 	<key>Input</key>
@@ -152,7 +152,6 @@ exit 0</string>
 				<array>
 					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 					<string>%RECIPE_CACHE_DIR%/scripts</string>
-					<string>%RECIPE_CACHE_DIR%/%NAME%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
