@@ -39,6 +39,22 @@ This recipe requires a license key to be provided in an override via the SNAGIT_
 				<dict>
 					<key>Applications</key>
 					<string>0775</string>
+					<key>/Users</key>
+					<string>0775</string>
+					<key>/Users/Shared</key>
+					<string>0777</string>
+					<key>/Users/Shared/TechSmith</key>
+					<string>0777</string>
+					<key>/Users/Shared/TechSmith/Snagit</key>
+					<string>0777</string>
+					<key>private</key>
+					<string>0775</string>
+					<key>private/tmp</key>
+					<string>0775</string>
+					<key>private/tmp/snagit</key>
+					<string>0775</string>
+					<key>private/tmp/snagit/scripts</key>
+					<string>0775</string>
 				</dict>
 				<key>pkgroot</key>
 				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
@@ -49,19 +65,8 @@ This recipe requires a license key to be provided in an override via the SNAGIT_
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>pkgdirs</key>
-				<dict/>
-				<key>pkgroot</key>
-				<string>%RECIPE_CACHE_DIR%/scripts</string>
-			</dict>
-			<key>Processor</key>
-			<string>PkgRootCreator</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
 				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/%app_name%</string>
+				<string>%pkgroot%/Applications/%app_name%</string>
 				<key>source_path</key>
 				<string>%pathname%/%app_name%</string>
 			</dict>
@@ -81,7 +86,7 @@ exit 0</string>
 				<key>file_mode</key>
 				<string>0755</string>
 				<key>file_path</key>
-				<string>%RECIPE_CACHE_DIR%/scripts/preinstall</string>
+				<string>%pkgroot%/private/tmp/snagit/scripts/preinstall</string>
 			</dict>
 			<key>Processor</key>
 			<string>FileCreator</string>
@@ -90,24 +95,11 @@ exit 0</string>
 			<key>Arguments</key>
 			<dict>
 				<key>file_content</key>
-				<string>#!/bin/sh
-
-regkey="%SNAGIT_KEY%"
-
-if [ -n "$regkey" ]; then
-	[[ ! -d "/Users/Shared/TechSmith/Snagit" ]] &amp;&amp; /bin/mkdir -p "/Users/Shared/TechSmith/Snagit"
-	echo "$regkey" &gt; "/Users/Shared/TechSmith/Snagit/LicenseKey"
-	/bin/chmod -R 777 "/Users/Shared/Snagit"
-	/bin/chmod a+x "/Users/Shared/TechSmith/Snagit/LicenseKey"
-else
-	echo "Warning:  Snagit was not licensed!"
-fi
-
-exit 0</string>
+				<string>%SNAGIT_KEY%</string>
 				<key>file_mode</key>
-				<string>0755</string>
+				<string>0777</string>
 				<key>file_path</key>
-				<string>%RECIPE_CACHE_DIR%/scripts/postinstall</string>
+				<string>%pkgroot%/Users/Shared/TechSmith/Snagit/LicenseKey</string>
 			</dict>
 			<key>Processor</key>
 			<string>FileCreator</string>
@@ -118,28 +110,15 @@ exit 0</string>
 				<key>pkg_request</key>
 				<dict>
 					<key>chown</key>
-					<array>
-						<dict>
-							<key>path</key>
-							<string>Applications</string>
-							<key>user</key>
-							<string>root</string>
-							<key>group</key>
-							<string>admin</string>
-						</dict>
-					</array>
+					<array/>
 					<key>id</key>
 					<string>%bundleid%</string>
 					<key>options</key>
 					<string>purge_ds_store</string>
-					<key>pkgdir</key>
-					<string>%RECIPE_CACHE_DIR%</string>
-					<key>pkgroot</key>
-					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
-					<key>scripts</key>
-					<string>scripts</string>
 					<key>pkgname</key>
 					<string>%NAME%-%version%</string>
+					<key>scripts</key>
+					<string>%pkgroot%/private/tmp/snagit/scripts</string>
 				</dict>
 			</dict>
 			<key>Processor</key>
@@ -150,8 +129,7 @@ exit 0</string>
 			<dict>
 				<key>path_list</key>
 				<array>
-					<string>%RECIPE_CACHE_DIR%/pkgroot</string>
-					<string>%RECIPE_CACHE_DIR%/scripts</string>
+					<string>%pkgroot%</string>
 				</array>
 			</dict>
 			<key>Processor</key>
