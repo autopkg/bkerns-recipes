@@ -45,7 +45,7 @@ defaults read /Users/Shared/TechSmith/Camtasia/Camtasia\ Registration\ Key\ Unif
 
 Download, JSS, Munki, and Pkg recipes for TechSmith Snagit.
 
-Munki and Pkg recipes include a preinstall script that removes an existing version prior to install, and a postinstall script that sets a number of first-run preferences. Also, the postinstall uses the optional `SNAGIT_KEY` input value to key the install with your registration key, if desired.
+The Download recipe includes a `PREINSTALL_SCRIPT` input value that removes an existing version prior to install, and a `POSTINSTALL_SCRIPT` input value to key the install with your registration key. These scripts are referenced by the Munki (both) and Pkg (preinstall only) recipes, and can be modified in an override if desired. To use the Munki, Pkg, or subsequent child recipes, a license key must be provided in an override via the `SNAGIT_KEY` input, which will license Snagit during the installation.
 
 To use `SNAGIT_KEY`, create an override and
   * For v2020 and newer:
@@ -60,7 +60,7 @@ defaults read /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist RegKey 
 **[Source](https://support.techsmith.com/hc/en-us/articles/115007344888-Enterprise-Install-Guidelines-for-Snagit-on-MacOS)**
 
 
-*NOTE: I previously used Munki regularly, but have recently moved to a JAMF shop. I have provided Munki recipes that I believe should work, but I do not make use of them. Munki Admins, please let me know if a Munki recipe needs adjusted!*
+*NOTE: I previously used Munki regularly, but have recently moved to a JAMF shop. I have provided Munki recipes that I believe should work, but I do not make use of them. Munki Admins, please let me know if a Munki recipe needs any adjustments!*
 
 bkerns-recipes
 --------------
