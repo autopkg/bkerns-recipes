@@ -3,18 +3,53 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest TechSmith Snagit disk image.</string>
+	<string>Downloads the latest TechSmith Snagit disk image.
+
+To use TechSmithSnagit.munki.recipe, TechSmith.pkg.recipe, or subsequent child recipes, a license key must be provided in an override via the SNAGIT_KEY input, which will license Snagit during the installation.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.kernsb.download.TechSmithSnagit</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>TechSmithSnagit</string>
+		<key>POSTINSTALL_SCRIPT</key>
+		<string>#!/bin/sh
+
+regkey="%SNAGIT_KEY%"
+
+if [ -n "$regkey" ]; then
+	[[ ! -d "/Users/Shared/TechSmith/Snagit" ]] &amp;&amp; /bin/mkdir -p "/Users/Shared/TechSmith/Snagit"
+	echo "$regkey" &gt; "/Users/Shared/TechSmith/Snagit/LicenseKey"
+	/bin/chmod -R 777 "/Users/Shared/Snagit"
+	/bin/chmod a+x "/Users/Shared/TechSmith/Snagit/LicenseKey"
+else
+	echo "Warning:  Snagit was not licensed!"
+fi
+
+exit 0</string>
+		<key>PREINSTALL_SCRIPT</key>
+		<string>#!/bin/sh
+
+echo "Deleting previous Snagit installs (if present)..."
+/usr/bin/find "/Applications" -name "Snagit*.app" -type d -maxdepth 1 -exec rm -rfv {} \;
+
+exit 0</string>
+		<key>SNAGIT_KEY</key>
+		<string></string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.5</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>predicate</key>
+				<string>SNAGIT_KEY == ""</string>
+			</dict>
+			<key>Processor</key>
+			<string>StopProcessingIf</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
