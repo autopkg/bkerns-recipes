@@ -27,11 +27,11 @@ To use this recipe or subsequent child recipes, a license key must be provided i
 					<string>0775</string>
 					<key>/Users</key>
 					<string>0775</string>
-					<key>/Users/Shared</key>
+					<key>Users/Shared</key>
 					<string>0777</string>
-					<key>/Users/Shared/TechSmith</key>
+					<key>Users/Shared/TechSmith</key>
 					<string>0777</string>
-					<key>/Users/Shared/TechSmith/Snagit</key>
+					<key>Users/Shared/TechSmith/Snagit</key>
 					<string>0777</string>
 					<key>private</key>
 					<string>0775</string>
