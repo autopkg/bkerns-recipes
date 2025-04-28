@@ -3,15 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the current release version of TechSmith Snagit and imports into Munki.</string>
+	<string>Downloads the current release version of TechSmith Snagit and imports into Munki.
+
+To use this recipe or subsequent child recipes, a license key must be provided in an override via the SNAGIT_KEY input, which will license Snagit during the installation.</string>
 	<key>Identifier</key>
 	<string>com.github.autopkg.kernsb.munki.TechSmithSnagit</string>
 	<key>Input</key>
 	<dict>
-		<key>NAME</key>
-		<string>TechSmithSnagit</string>
-        <key>SNAGIT_KEY</key>
-        <string></string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/TechSmith</string>
 		<key>pkginfo</key>
@@ -35,84 +33,9 @@
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>preinstall_script</key>
-			<string>#!/bin/sh
-
-# Remove previous version of Snagit from /Applications
-
-if [ -d "/Applications/Snagit.app" ]; then
-   /bin/rm -rf "/Applications/Snagit.app"
-fi
-</string>
+			<string>%PREINSTALL_SCRIPT%</string>
 			<key>postinstall_script</key>
-			<string>#!/bin/sh
-
-regkey="%SNAGIT_KEY%"
-
-if [ -n "$regkey" ]; then
-	[[ ! -d /Users/Shared/TechSmith ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith
-	[[ ! -d /Users/Shared/TechSmith/Snagit ]] &amp;&amp; /bin/mkdir /Users/Shared/TechSmith/Snagit
-	/usr/bin/defaults write /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey RegKey -data "$regkey"
-	/usr/bin/plutil -convert xml1 /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist
-	/bin/mv /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey.plist /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey
-	/bin/chmod -R 777 /Users/Shared/TechSmith
-	/bin/chmod a+x /Users/Shared/TechSmith/Snagit/SnagitRegistrationKey
-fi
-
-ver=$(defaults read /Applications/Snagit.app/Contents/Info.plist CFBundleShortVersionString)
-
-for USER_TEMPLATE in $(/bin/ls /System/Library/User\ Template)
-do
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" DidTheOneOneRearrange -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" Ran1.1Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" Ran3.3Upgrade -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" SUEnableAutomaticChecks -bool "FALSE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" SUHasLaunchedBefore -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" SULastCheckTime -date "2015-01-01 12:00:00 +0000"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" SUSendProfileInfo -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" autosaveFolderLocation -string "/Users/Shared/TechSmith"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" currentCaptureMode -int 5
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" defaultCollapsed -bool "FALSE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" hasLaunchedSnagitPreviously -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" lastLaunchedSnagitVersion -string "${ver}"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" lastNag -date "2015-01-01 12:00:00 +0000"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" lastUsedTool -int 2
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" newInstallSendAttempts -int 0
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" resetVideoData -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" stampSubpath -string "/Stamps.localized"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" tutorialAssetsShown -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" tutorialImageShown -bool "TRUE"
-    /usr/bin/defaults write "/System/Library/User Template/${USER_TEMPLATE}/Library/Preferences/com.TechSmith.Snagit" RearrangedForStepTool -bool "TRUE"
-done
-
-for USER in $(/bin/ls /Users | /usr/bin/grep -v "Shared\|\.")
-do
-    if [ ! USER = "Shared" ]; then
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" DidTheOneOneRearrange -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" Ran1.1Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" Ran3.3Upgrade -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" SUEnableAutomaticChecks -bool "FALSE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" SUHasLaunchedBefore -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" SULastCheckTime -date "2015-01-01 12:00:00 +0000"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" SUSendProfileInfo -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" autosaveFolderLocation -string "/Users/Shared/TechSmith"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" currentCaptureMode -int 5
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" defaultCollapsed -bool "FALSE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" hasLaunchedSnagitPreviously -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" lastLaunchedSnagitVersion -string "${ver}"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" lastNag -date "2015-01-01 12:00:00 +0000"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" lastUsedTool -int 2
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" newInstallSendAttempts -int 0
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" resetVideoData -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" stampSubpath -string "/Stamps.localized"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" tutorialAssetsShown -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" tutorialImageShown -bool "TRUE"
-        /usr/bin/defaults write "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit" RearrangedForStepTool -bool "TRUE"
-        owner=$(/usr/bin/stat -f &#37;Su:&#37;Sg "/Users/${USER}/Library/Preferences")
-        /usr/sbin/chown "${owner}" "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit.plist"
-        /bin/chmod 600 "/Users/${USER}/Library/Preferences/com.TechSmith.Snagit.plist"
-    fi
-done
-</string>
+			<string>%POSTINSTALL_SCRIPT%</string>
 			<key>unattended_install</key>
 			<true/>
 			<key>unattended_uninstall</key>
