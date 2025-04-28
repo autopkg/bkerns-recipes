@@ -25,7 +25,7 @@ To use this recipe or subsequent child recipes, a license key must be provided i
 				<dict>
 					<key>Applications</key>
 					<string>0775</string>
-					<key>/Users</key>
+					<key>Users</key>
 					<string>0775</string>
 					<key>Users/Shared</key>
 					<string>0777</string>
